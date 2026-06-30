@@ -76,17 +76,15 @@ function PropertyListingContent() {
         </div>
 
         <div className="container" style={{ padding: '32px 16px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '32px', alignItems: 'start' }}>
+          <div className="properties-layout" style={{ display: 'grid', gap: '24px', alignItems: 'start' }}>
             
             {/* Sidebar Filters */}
-            <aside style={{
+            <aside className="properties-sidebar" style={{
               background: 'white',
               borderRadius: 'var(--radius-xl)',
               padding: '24px',
               border: '1px solid var(--border-light)',
               boxShadow: 'var(--shadow-sm)',
-              position: 'sticky',
-              top: '100px',
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
                 <h3 style={{ fontSize: '1.125rem', fontWeight: '700' }}>Filters</h3>
@@ -217,9 +215,8 @@ function PropertyListingContent() {
 
               {/* Grid of Results */}
               {filteredProperties.length > 0 ? (
-                <div style={{
+                <div className="properties-grid" style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
                   gap: '24px',
                 }}>
                   {filteredProperties.map(p => (
@@ -251,6 +248,40 @@ function PropertyListingContent() {
       </main>
 
       <Footer />
+
+      <style jsx global>{`
+        .properties-layout {
+          grid-template-columns: 280px 1fr;
+        }
+        .properties-sidebar {
+          position: sticky;
+          top: 100px;
+        }
+        .properties-grid {
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+        @media (max-width: 1024px) {
+          .properties-layout {
+            grid-template-columns: 240px 1fr;
+          }
+        }
+        @media (max-width: 768px) {
+          .properties-layout {
+            grid-template-columns: 1fr;
+          }
+          .properties-sidebar {
+            position: static;
+          }
+          .properties-grid {
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+          }
+        }
+        @media (max-width: 480px) {
+          .properties-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
     </>
   );
 }
