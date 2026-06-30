@@ -739,3 +739,30 @@ input, select, textarea {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Tenant Dashboard Styles */
+.tenant-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.tenant-tabs {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tenant-tabs::-webkit-scrollbar {
+  display: none;
+}
+.tenant-tabs button {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .tenant-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}

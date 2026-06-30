@@ -53,7 +53,7 @@ export default function TenantDashboard() {
 
         {/* Navigation Tabs */}
         <div style={{ background: 'white', borderBottom: '1px solid var(--border-light)' }}>
-          <div className="container" style={{ display: 'flex', gap: '24px' }}>
+          <div className="container tenant-tabs">
             {[
               { id: 'overview', label: '🏠 My Stay & Dues' },
               { id: 'maintenance', label: '🛠️ Maintenance & Complaints' },
@@ -81,7 +81,7 @@ export default function TenantDashboard() {
 
         <div className="container" style={{ marginTop: '32px' }}>
           {activeTab === 'overview' && (
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px', alignItems: 'start' }}>
+            <div className="tenant-grid">
               <div>
                 {/* Active Stay Section */}
                 <h3 style={{ fontSize: '1.25rem', fontWeight: '800', marginBottom: '16px' }}>🏠 My Active Stay</h3>
