@@ -36,6 +36,18 @@ yarn-error.log*
 # vercel
 .vercel
 
+# license files
+LICENSE*
+license*
+
+# secrets & API keys
+*.secret
+*.key
+config.js
+secrets/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
