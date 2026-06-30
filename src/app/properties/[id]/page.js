@@ -1,22 +1,25 @@
 'use client';
-import { useState, use } from 'react';
+import { useState, use, useEffect } from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import AuthModal from '@/components/AuthModal';
+import PageShell from '@/components/PageShell';
 import { properties } from '@/data/properties';
 
 export default function PropertyDetailPage({ params: paramsPromise }) {
   const params = use(paramsPromise);
-  const [authOpen, setAuthOpen] = useState(false);
+  const propId = String(params.id);
+
+  const initialProperty = properties.find(p => String(p.id) === propId) || properties[0];
+  const [property, setProperty] = useState(initialProperty);
+
   const [activeTab, setActiveTab] = useState('overview');
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [bookingDate, setBookingDate] = useState('');
   const [duration, setDuration] = useState('1');
 
-  // Find property by id (params.id can be number or string)
-  const propId = String(params.id);
-  const property = properties.find(p => String(p.id) === propId) || properties[0];
+  useEffect(() => {
+    const found = properties.find(p => String(p.id) === propId) || properties[0];
+    setProperty(found);
+  }, [propId]);
 
   const rent = property.rent || property.price || 10000;
   const deposit = property.deposit || rent * 2;
@@ -50,10 +53,7 @@ export default function PropertyDetailPage({ params: paramsPromise }) {
   };
 
   return (
-    <>
-      <Navbar onAuthClick={() => setAuthOpen(true)} />
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
-
+    <PageShell>
       <main style={{ paddingTop: '80px', background: 'var(--bg-secondary)', minHeight: '100vh', paddingBottom: '60px' }}>
         {/* Breadcrumb Navigation */}
         <div style={{ background: 'white', borderBottom: '1px solid var(--border-light)', padding: '16px 0' }}>
@@ -308,8 +308,6 @@ export default function PropertyDetailPage({ params: paramsPromise }) {
           </div>
         </div>
       </main>
-
-      <Footer />
-    </>
+    </PageShell>
   );
 }

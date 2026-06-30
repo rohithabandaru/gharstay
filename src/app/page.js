@@ -1,26 +1,25 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import PageShell from '@/components/PageShell';
 import PropertyCard from '@/components/PropertyCard';
-import AuthModal from '@/components/AuthModal';
 import { properties, cities, propertyTypes, bangaloreAreas } from '@/data/properties';
 import { testimonials } from '@/data/tenants';
 
 export default function HomePage() {
-  const [authOpen, setAuthOpen] = useState(false);
   const [searchArea, setSearchArea] = useState('');
   const [searchType, setSearchType] = useState('');
+  const [allProperties, setAllProperties] = useState([]);
 
-  const featuredProps = properties.filter(p => p.featured).slice(0, 6);
+  useEffect(() => {
+    setAllProperties([...properties]);
+  }, []);
+
+  const featuredProps = allProperties.filter(p => p.featured).slice(0, 6);
 
   return (
-    <>
-      <Navbar onAuthClick={() => setAuthOpen(true)} />
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
-
-      <main>
+    <PageShell>
+      <main style={{ minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '60px' }}>
         {/* ===== HERO SECTION ===== */}
         <section style={{
           paddingTop: '120px',
@@ -496,9 +495,7 @@ export default function HomePage() {
           </div>
         </section>
       </main>
-
-      <Footer />
-    </>
+    </PageShell>
   );
 }
 

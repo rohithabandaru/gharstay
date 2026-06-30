@@ -1,12 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import AuthModal from '@/components/AuthModal';
+import PageShell from '@/components/PageShell';
 
 export default function TenantDashboard() {
-  const [authOpen, setAuthOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
   const [rentPaid, setRentPaid] = useState(false);
   const [ticketSent, setTicketSent] = useState(false);
@@ -32,10 +29,7 @@ export default function TenantDashboard() {
   };
 
   return (
-    <>
-      <Navbar onAuthClick={() => setAuthOpen(true)} />
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
-
+    <PageShell>
       <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '60px' }}>
         {/* Header */}
         <div style={{ background: 'white', borderBottom: '1px solid var(--border-light)', padding: '28px 0' }}>
@@ -264,8 +258,6 @@ export default function TenantDashboard() {
           )}
         </div>
       </main>
-
-      <Footer />
-    </>
+    </PageShell>
   );
 }

@@ -220,3 +220,39 @@ export const properties = [
     postedDate: '2026-06-22',
   },
 ];
+
+// Synchronize properties with localStorage on client load
+if (typeof window !== 'undefined') {
+  const stored = localStorage.getItem('gharstay_properties');
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored);
+      properties.length = 0;
+      properties.push(...parsed);
+    } catch (e) {
+      console.error("Error parsing stored properties", e);
+    }
+  } else {
+    localStorage.setItem('gharstay_properties', JSON.stringify(properties));
+  }
+}
+
+export function saveProperties(newPropertiesList) {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('gharstay_properties', JSON.stringify(newPropertiesList));
+    properties.length = 0;
+    properties.push(...newPropertiesList);
+  }
+}
+
+export function addProperty(newProperty) {
+  if (typeof window !== 'undefined') {
+    const stored = localStorage.getItem('gharstay_properties');
+    const list = stored ? JSON.parse(stored) : [...properties];
+    if (!list.some(p => String(p.id) === String(newProperty.id))) {
+      list.unshift(newProperty);
+      saveProperties(list);
+    }
+  }
+}
+

@@ -1,14 +1,11 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import AuthModal from '@/components/AuthModal';
+import PageShell from '@/components/PageShell';
 import { mockTenants } from '@/data/tenants';
 import { properties } from '@/data/properties';
 
 export default function TenantManagementPage() {
-  const [authOpen, setAuthOpen] = useState(false);
   const [tenantList, setTenantList] = useState(mockTenants);
   const [filterStatus, setFilterStatus] = useState('all');
   const [showAddModal, setShowAddModal] = useState(false);
@@ -69,11 +66,8 @@ export default function TenantManagementPage() {
   });
 
   return (
-    <>
-      <Navbar onAuthClick={() => setAuthOpen(true)} />
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
-
-      <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '60px' }}>
+    <PageShell>
+      <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '80px' }}>
         {/* Header */}
         <div style={{ background: 'white', borderBottom: '1px solid var(--border-light)', padding: '24px 0' }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
@@ -333,8 +327,6 @@ export default function TenantManagementPage() {
           </div>
         )}
       </main>
-
-      <Footer />
-    </>
+    </PageShell>
   );
 }

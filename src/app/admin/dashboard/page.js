@@ -1,15 +1,16 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import AuthModal from '@/components/AuthModal';
-import { properties, cities, propertyTypes, bangaloreAreas } from '@/data/properties';
+import PageShell from '@/components/PageShell';
+import { properties, cities, propertyTypes, bangaloreAreas, addProperty, saveProperties } from '@/data/properties';
 import { tenants } from '@/data/tenants';
 
 export default function AdminDashboard() {
-  const [authOpen, setAuthOpen] = useState(false);
-  const [propertyList, setPropertyList] = useState(properties);
+  const [propertyList, setPropertyList] = useState([]);
+
+  useEffect(() => {
+    setPropertyList([...properties]);
+  }, []);
   const [showAddModal, setShowAddModal] = useState(false);
 
   // Form state for admin posting properties on behalf of owners
@@ -24,36 +25,52 @@ export default function AdminDashboard() {
   });
 
   const toggleVerifyProperty = (id) => {
-    setPropertyList(prev => prev.map(p => p.id === id ? { ...p, verified: !p.verified } : p));
+    const updated = propertyList.map(p => p.id === id ? { ...p, verified: !p.verified } : p);
+    setPropertyList(updated);
+    saveProperties(updated);
   };
 
   const handleAdminAddProperty = (e) => {
     e.preventDefault();
+    const rentAmount = Number(newProp.rent);
     const created = {
       id: Date.now(),
       title: newProp.title,
       type: newProp.type,
       city: newProp.city,
       area: newProp.area,
-      rent: Number(newProp.rent),
-      deposit: Number(newProp.rent) * 2,
+      address: `${newProp.area}, ${newProp.city}`,
+      rent: rentAmount,
+      price: rentAmount,
+      deposit: rentAmount * 2,
+      maintenance: 500,
+      roomType: 'Private Room',
+      gender: 'unisex',
+      furnishing: 'Fully Furnished',
       verified: true,
       featured: true,
-      owner: { name: newProp.ownerName || 'Verified Owner', phone: newProp.ownerPhone },
-      images: ['https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80'],
+      available: true,
+      amenities: ['wifi', 'ac', 'power-backup', 'security', 'cctv'],
+      owner: { id: Date.now(), name: newProp.ownerName || 'Verified Owner', phone: newProp.ownerPhone, responseRate: 95, image: '' },
+      images: [
+        'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80'
+      ],
       rating: 5.0,
       reviews: 1,
+      description: `Admin verified ${newProp.type} listing in ${newProp.area}, ${newProp.city}. Premium accommodation with all modern amenities.`,
+      rules: ['No smoking', 'No pets', 'Quiet hours 10 PM - 6 AM'],
+      postedDate: new Date().toISOString().split('T')[0],
     };
+    addProperty(created);
     setPropertyList([created, ...propertyList]);
     setShowAddModal(false);
     setNewProp({ title: '', type: 'pg', city: 'bangalore', area: '', rent: '12000', ownerName: '', ownerPhone: '' });
   };
 
   return (
-    <>
-      <Navbar onAuthClick={() => setAuthOpen(true)} />
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
-
+    <PageShell>
       <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '60px' }}>
         {/* Header */}
         <div style={{ background: 'var(--gray-900)', color: 'white', padding: '28px 0' }}>
@@ -194,8 +211,6 @@ export default function AdminDashboard() {
           </div>
         )}
       </main>
-
-      <Footer />
-    </>
+    </PageShell>
   );
 }

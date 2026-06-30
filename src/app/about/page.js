@@ -1,17 +1,9 @@
 'use client';
-import { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import AuthModal from '@/components/AuthModal';
+import PageShell from '@/components/PageShell';
 
 export default function AboutPage() {
-  const [authOpen, setAuthOpen] = useState(false);
-
   return (
-    <>
-      <Navbar onAuthClick={() => setAuthOpen(true)} />
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
-
+    <PageShell>
       <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '80px' }}>
         {/* Hero Section */}
         <section style={{
@@ -87,8 +79,6 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
-    </>
+    </PageShell>
   );
 }

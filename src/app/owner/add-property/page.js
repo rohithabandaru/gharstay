@@ -1,13 +1,10 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import AuthModal from '@/components/AuthModal';
-import { cities, propertyTypes, bangaloreAreas } from '@/data/properties';
+import PageShell from '@/components/PageShell';
+import { cities, propertyTypes, bangaloreAreas, addProperty } from '@/data/properties';
 
 export default function AddPropertyPage() {
-  const [authOpen, setAuthOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
@@ -25,14 +22,47 @@ export default function AddPropertyPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const rentAmount = Number(formData.price || 12000);
+    const depositAmount = Number(formData.deposit || rentAmount * 2);
+
+    const newProperty = {
+      id: Date.now(),
+      title: formData.title,
+      type: formData.type,
+      city: formData.city,
+      area: formData.area || 'Koramangala',
+      address: `${formData.area || 'Koramangala'}, ${formData.city || 'Bangalore'}`,
+      rent: rentAmount,
+      price: rentAmount,
+      deposit: depositAmount,
+      maintenance: 500,
+      roomType: formData.sharing || 'Private Room',
+      gender: formData.gender || 'unisex',
+      furnishing: 'Fully Furnished',
+      amenities: ['wifi', 'power-backup', 'security', 'cctv', 'geyser'],
+      images: [
+        'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80'
+      ],
+      rating: 5.0,
+      reviews: 1,
+      description: `Newly listed ${formData.type} in ${formData.area}, ${formData.city}. Spacious room with all modern amenities, ready to move in. Contact the owner for immediate visiting slot.`,
+      rules: ['No smoking', 'No pets', 'Guests allowed during daytime'],
+      owner: { id: 9, name: 'Rajesh Sharma', phone: '+91 98765 43210', responseRate: 98, image: '' },
+      featured: false,
+      verified: true,
+      available: true,
+      postedDate: new Date().toISOString().split('T')[0],
+    };
+
+    addProperty(newProperty);
     setSubmitted(true);
   };
 
   return (
-    <>
-      <Navbar onAuthClick={() => setAuthOpen(true)} />
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
-
+    <PageShell>
       <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '60px' }}>
         {/* Header */}
         <div style={{ background: 'white', borderBottom: '1px solid var(--border-light)', padding: '24px 0' }}>
@@ -190,8 +220,6 @@ export default function AddPropertyPage() {
           </div>
         </div>
       </main>
-
-      <Footer />
-    </>
+    </PageShell>
   );
 }

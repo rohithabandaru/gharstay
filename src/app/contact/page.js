@@ -1,23 +1,23 @@
 'use client';
 import { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import AuthModal from '@/components/AuthModal';
+import PageShell from '@/components/PageShell';
 
 export default function ContactPage() {
-  const [authOpen, setAuthOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Honeypot spam protection: if the hidden field has content, silently reject
+    if (honeypot) {
+      setSubmitted(true); // Show success to fool the bot, but do nothing
+      return;
+    }
     setSubmitted(true);
   };
 
   return (
-    <>
-      <Navbar onAuthClick={() => setAuthOpen(true)} />
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
-
+    <PageShell>
       <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '80px' }}>
         <div style={{ background: 'white', borderBottom: '1px solid var(--border-light)', padding: '48px 0', textAlign: 'center' }}>
           <div className="container">
@@ -42,6 +42,17 @@ export default function ContactPage() {
               ) : (
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '8px' }}>Send Us a Message</h3>
+                  {/* Honeypot field — invisible to real users, traps spam bots */}
+                  <input
+                    type="text"
+                    name="website_url"
+                    value={honeypot}
+                    onChange={e => setHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0 }}
+                  />
                   <div>
                     <label className="form-label">Full Name</label>
                     <input type="text" required className="form-input" placeholder="Enter your name" />
@@ -59,7 +70,7 @@ export default function ContactPage() {
               )}
             </div>
 
-            {/* Support Info Box */}
+            {/* Support Info Box — contact info synchronized with Footer */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
               <div style={{ background: 'white', padding: '24px', borderRadius: 'var(--radius-xl)', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-sm)' }}>
                 <h4 style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '12px' }}>📍 Corporate Head Office</h4>
@@ -73,17 +84,15 @@ export default function ContactPage() {
               <div style={{ background: 'white', padding: '24px', borderRadius: 'var(--radius-xl)', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-sm)' }}>
                 <h4 style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '12px' }}>📞 Helpline & Support</h4>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: '1.8' }}>
-                  <strong>Tenant Hotline:</strong> +91 1800-442-7782<br />
+                  <strong>Tenant Hotline:</strong> +91 1800-123-4567<br />
                   <strong>Owner Partner Desk:</strong> +91 98765 00000<br />
-                  <strong>Email:</strong> support@gharstay.in
+                  <strong>Email:</strong> support@gharstay.com
                 </p>
               </div>
             </div>
           </div>
         </div>
       </main>
-
-      <Footer />
-    </>
+    </PageShell>
   );
 }

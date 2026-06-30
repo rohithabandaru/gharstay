@@ -1,23 +1,17 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import AuthModal from '@/components/AuthModal';
+import PageShell from '@/components/PageShell';
 import { mockTenants, mockBookings } from '@/data/tenants';
 import { properties } from '@/data/properties';
 
 export default function OwnerDashboard() {
-  const [authOpen, setAuthOpen] = useState(false);
 
   const ownerProps = properties.slice(0, 3);
   const pendingRequests = mockBookings.filter(b => b.status === 'Pending');
 
   return (
-    <>
-      <Navbar onAuthClick={() => setAuthOpen(true)} />
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
-
+    <PageShell>
       <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '60px' }}>
         {/* Top Header */}
         <div style={{ background: 'white', borderBottom: '1px solid var(--border-light)', padding: '24px 0' }}>
@@ -138,8 +132,6 @@ export default function OwnerDashboard() {
 
         </div>
       </main>
-
-      <Footer />
-    </>
+    </PageShell>
   );
 }

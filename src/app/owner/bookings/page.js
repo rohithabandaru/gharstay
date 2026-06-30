@@ -1,13 +1,10 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import AuthModal from '@/components/AuthModal';
+import PageShell from '@/components/PageShell';
 import { mockBookings } from '@/data/tenants';
 
 export default function BookingsManagementPage() {
-  const [authOpen, setAuthOpen] = useState(false);
   const [bookings, setBookings] = useState(mockBookings);
 
   const handleAction = (id, newStatus) => {
@@ -15,10 +12,7 @@ export default function BookingsManagementPage() {
   };
 
   return (
-    <>
-      <Navbar onAuthClick={() => setAuthOpen(true)} />
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
-
+    <PageShell>
       <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '60px' }}>
         {/* Header */}
         <div style={{ background: 'white', borderBottom: '1px solid var(--border-light)', padding: '24px 0' }}>
@@ -91,8 +85,6 @@ export default function BookingsManagementPage() {
           </div>
         </div>
       </main>
-
-      <Footer />
-    </>
+    </PageShell>
   );
 }

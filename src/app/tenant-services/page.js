@@ -1,11 +1,8 @@
 'use client';
 import { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import AuthModal from '@/components/AuthModal';
+import PageShell from '@/components/PageShell';
 
 export default function TenantServicesPage() {
-  const [authOpen, setAuthOpen] = useState(false);
   const [bookedService, setBookedService] = useState(null);
 
   const services = [
@@ -44,10 +41,7 @@ export default function TenantServicesPage() {
   ];
 
   return (
-    <>
-      <Navbar onAuthClick={() => setAuthOpen(true)} />
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
-
+    <PageShell>
       <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '80px' }}>
         {/* Header */}
         <div style={{ background: 'linear-gradient(180deg, var(--primary-50) 0%, #FFFFFF 100%)', padding: '48px 0', textAlign: 'center', borderBottom: '1px solid var(--border-light)' }}>
@@ -94,8 +88,6 @@ export default function TenantServicesPage() {
           </div>
         </div>
       </main>
-
-      <Footer />
-    </>
+    </PageShell>
   );
 }

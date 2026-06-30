@@ -1,10 +1,8 @@
 'use client';
-import { useState, useMemo, Suspense } from 'react';
+import { useState, useMemo, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import PageShell from '@/components/PageShell';
 import PropertyCard from '@/components/PropertyCard';
-import AuthModal from '@/components/AuthModal';
 import { properties, cities, propertyTypes, bangaloreAreas } from '@/data/properties';
 
 function FilterContent({ selectedArea, setSelectedArea, selectedType, setSelectedType, selectedGender, setSelectedGender, priceRange, setPriceRange, verifiedOnly, setVerifiedOnly, resetFilters }) {
@@ -104,7 +102,6 @@ function PropertyListingContent() {
   const initialArea = searchParams.get('area') || '';
   const initialType = searchParams.get('type') || '';
 
-  const [authOpen, setAuthOpen] = useState(false);
   const [selectedArea, setSelectedArea] = useState(initialArea);
   const [selectedType, setSelectedType] = useState(initialType);
   const [searchQuery, setSearchQuery] = useState('');
@@ -113,6 +110,11 @@ function PropertyListingContent() {
   const [sortBy, setSortBy] = useState('featured');
   const [verifiedOnly, setVerifiedOnly] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [allProperties, setAllProperties] = useState([]);
+
+  useEffect(() => {
+    setAllProperties([...properties]);
+  }, []);
 
   const activeFilterCount = [
     selectedArea !== '',
@@ -123,7 +125,7 @@ function PropertyListingContent() {
   ].filter(Boolean).length;
 
   const filteredProperties = useMemo(() => {
-    return properties.filter(p => {
+    return allProperties.filter(p => {
       const propRent = p.rent || p.price || 0;
       if (selectedArea && p.area.toLowerCase() !== selectedArea.toLowerCase()) return false;
       if (selectedType && p.type !== selectedType) return false;
@@ -146,7 +148,7 @@ function PropertyListingContent() {
       if (sortBy === 'rating') return (b.rating || 0) - (a.rating || 0);
       return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
     });
-  }, [selectedArea, selectedType, selectedGender, priceRange, verifiedOnly, searchQuery, sortBy]);
+  }, [selectedArea, selectedType, selectedGender, priceRange, verifiedOnly, searchQuery, sortBy, allProperties]);
 
   const resetFilters = () => {
     setSelectedArea('');
@@ -168,10 +170,7 @@ function PropertyListingContent() {
   };
 
   return (
-    <>
-      <Navbar onAuthClick={() => setAuthOpen(true)} />
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
-
+    <PageShell>
       <main style={{ paddingTop: '80px', minHeight: '80vh', background: 'var(--bg-secondary)' }}>
         {/* Header */}
         <div style={{ background: 'white', borderBottom: '1px solid var(--border-light)', padding: '32px 0' }}>
@@ -426,25 +425,7 @@ function PropertyListingContent() {
           </button>
         </div>
       </div>
-
-      <Footer />
-
-      <style jsx global>{`
-        .properties-layout {
-          grid-template-columns: 280px 1fr;
-        }
-        .properties-sidebar {
-          position: sticky;
-          top: 100px;
-        }
-        .properties-grid {
-          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        }
-        .mobile-filter-btn {
-          display: none;
-        }
-      `}</style>
-    </>
+    </PageShell>
   );
 }
 
