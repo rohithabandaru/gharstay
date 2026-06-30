@@ -218,7 +218,6 @@ function PropertyListingContent() {
                   className="mobile-filter-btn"
                   onClick={() => setMobileFiltersOpen(true)}
                   style={{
-                    display: 'none',
                     alignItems: 'center',
                     gap: '6px',
                     padding: '10px 16px',
@@ -441,29 +440,8 @@ function PropertyListingContent() {
         .properties-grid {
           grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         }
-        @media (max-width: 1024px) {
-          .properties-layout {
-            grid-template-columns: 240px 1fr;
-          }
-        }
-        @media (max-width: 768px) {
-          .properties-layout {
-            grid-template-columns: 1fr;
-          }
-          .properties-sidebar {
-            display: none !important;
-          }
-          .mobile-filter-btn {
-            display: flex !important;
-          }
-          .properties-grid {
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-          }
-        }
-        @media (max-width: 480px) {
-          .properties-grid {
-            grid-template-columns: 1fr;
-          }
+        .mobile-filter-btn {
+          display: none;
         }
       `}</style>
     </>

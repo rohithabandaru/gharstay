@@ -702,6 +702,9 @@ input, select, textarea {
   .section { padding: 60px 0; }
   .section-alt { padding: 60px 0; }
   .container { padding: 0 20px; }
+  .properties-layout {
+    grid-template-columns: 240px 1fr !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -714,10 +717,25 @@ input, select, textarea {
   .section-subtitle { font-size: 1rem; }
   .container { padding: 0 16px; }
   .btn-lg { padding: 14px 24px; font-size: 1rem; }
+  .properties-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .properties-sidebar {
+    display: none !important;
+  }
+  .mobile-filter-btn {
+    display: flex !important;
+  }
+  .properties-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+  }
 }
 
 @media (max-width: 480px) {
   h1 { font-size: 1.5rem; }
   .section { padding: 36px 0; }
   .section-alt { padding: 36px 0; }
+  .properties-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
