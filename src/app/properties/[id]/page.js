@@ -112,7 +112,7 @@ export default function PropertyDetailPage({ params: paramsPromise }) {
           </div>
 
           {/* Main Layout Grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: '32px' }}>
+          <div className="property-details-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: '32px' }}>
             
             {/* Left Main Details */}
             <div>
@@ -226,7 +226,7 @@ export default function PropertyDetailPage({ params: paramsPromise }) {
             </div>
 
             {/* Right Sidebar - Instant Booking Box */}
-            <div>
+            <div className="booking-sidebar">
               <div style={{
                 background: 'white',
                 borderRadius: 'var(--radius-xl)',
@@ -308,6 +308,21 @@ export default function PropertyDetailPage({ params: paramsPromise }) {
           </div>
         </div>
       </main>
+
+      <style jsx>{`
+        @media (max-width: 1024px) {
+          .property-details-grid {
+            display: flex !important;
+            flex-direction: column !important;
+            grid-template-columns: unset !important;
+          }
+          .booking-sidebar {
+            order: -1;
+            position: relative !important;
+            top: unset !important;
+          }
+        }
+      `}</style>
     </PageShell>
   );
 }
