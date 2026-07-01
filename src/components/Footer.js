@@ -1,6 +1,17 @@
+'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = () => {
+    if (!email || !email.includes('@')) return;
+    setSubscribed(true);
+    setEmail('');
+    setTimeout(() => setSubscribed(false), 4000);
+  };
   return (
     <footer style={{
       background: 'var(--gray-900)',
@@ -94,37 +105,83 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 style={{ color: 'white', fontSize: '0.938rem', fontWeight: '700', marginBottom: '16px', fontFamily: 'var(--font-heading)' }}>Contact Us</h4>
-            <p style={{ fontSize: '0.875rem', color: 'var(--gray-400)', marginBottom: '8px' }}>📧 support@gharstay.com</p>
-            <p style={{ fontSize: '0.875rem', color: 'var(--gray-400)', marginBottom: '8px' }}>📞 +91 1800-123-4567</p>
-            <p style={{ fontSize: '0.875rem', color: 'var(--gray-400)', marginBottom: '20px' }}>📍 Bangalore, India</p>
-            <div style={{
-              background: 'var(--gray-800)',
-              borderRadius: 'var(--radius-md)',
-              padding: '12px',
-            }}>
-              <p style={{ fontSize: '0.75rem', color: 'var(--gray-400)', marginBottom: '8px' }}>Subscribe to Newsletter</p>
-              <div style={{ display: 'flex', gap: '6px' }}>
-                <input placeholder="Your email" style={{
-                  flex: 1,
-                  padding: '8px 12px',
-                  borderRadius: 'var(--radius-sm)',
-                  border: '1px solid var(--gray-700)',
-                  background: 'var(--gray-900)',
-                  color: 'white',
-                  fontSize: '0.813rem',
-                  outline: 'none',
-                }} />
-                <button style={{
-                  padding: '8px 14px',
-                  background: 'var(--primary-gradient)',
-                  color: 'white',
-                  borderRadius: 'var(--radius-sm)',
-                  border: 'none',
-                  fontSize: '0.75rem',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                }}>→</button>
-              </div>
+
+            <a href="mailto:support@gharstay.com" style={{
+              display: 'block',
+              fontSize: '0.875rem',
+              color: 'var(--gray-400)',
+              marginBottom: '8px',
+              textDecoration: 'none',
+              transition: 'color 0.2s',
+            }}
+              onMouseEnter={e => e.target.style.color = 'white'}
+              onMouseLeave={e => e.target.style.color = 'var(--gray-400)'}
+            >📧 support@gharstay.com</a>
+
+            <a href="tel:+911800-123-4567" style={{
+              display: 'block',
+              fontSize: '0.875rem',
+              color: 'var(--gray-400)',
+              marginBottom: '8px',
+              textDecoration: 'none',
+              transition: 'color 0.2s',
+            }}
+              onMouseEnter={e => e.target.style.color = 'white'}
+              onMouseLeave={e => e.target.style.color = 'var(--gray-400)'}
+            >📞 +91 1800-123-4567</a>
+
+            <a href="https://maps.google.com/?q=Bangalore,India" target="_blank" rel="noopener noreferrer" style={{
+              display: 'block',
+              fontSize: '0.875rem',
+              color: 'var(--gray-400)',
+              marginBottom: '20px',
+              textDecoration: 'none',
+              transition: 'color 0.2s',
+            }}
+              onMouseEnter={e => e.target.style.color = 'white'}
+              onMouseLeave={e => e.target.style.color = 'var(--gray-400)'}
+            >📍 Bangalore, India</a>
+
+            <div style={{ background: 'var(--gray-800)', borderRadius: 'var(--radius-md)', padding: '12px' }}>
+              {subscribed ? (
+                <p style={{ fontSize: '0.75rem', color: '#10B981', textAlign: 'center', padding: '8px 0' }}>✅ Subscribed successfully!</p>
+              ) : (
+                <>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--gray-400)', marginBottom: '8px' }}>Subscribe to Newsletter</p>
+                  <div style={{ display: 'flex', gap: '6px' }}>
+                    <input
+                      type="email"
+                      placeholder="Your email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      onKeyDown={e => e.key === 'Enter' && handleSubscribe()}
+                      style={{
+                        flex: 1,
+                        padding: '8px 12px',
+                        borderRadius: 'var(--radius-sm)',
+                        border: '1px solid var(--gray-700)',
+                        background: 'var(--gray-900)',
+                        color: 'white',
+                        fontSize: '0.813rem',
+                        outline: 'none',
+                      }}
+                    />
+                    <button
+                      onClick={handleSubscribe}
+                      style={{
+                        padding: '8px 14px',
+                        background: 'var(--primary-gradient)',
+                        color: 'white',
+                        borderRadius: 'var(--radius-sm)',
+                        border: 'none',
+                        fontSize: '0.75rem',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                      }}
+                    >→</button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
