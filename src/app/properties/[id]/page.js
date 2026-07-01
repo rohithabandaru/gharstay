@@ -54,7 +54,7 @@ export default function PropertyDetailPage({ params: paramsPromise }) {
 
   return (
     <PageShell>
-      <main style={{ paddingTop: '80px', background: 'var(--bg-secondary)', minHeight: '100vh', paddingBottom: '60px' }}>
+      <main className="page-main" style={{ background: 'var(--bg-secondary)', minHeight: '100vh', paddingBottom: '60px' }}>
         {/* Breadcrumb Navigation */}
         <div style={{ background: 'white', borderBottom: '1px solid var(--border-light)', padding: '16px 0' }}>
           <div className="container" style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>

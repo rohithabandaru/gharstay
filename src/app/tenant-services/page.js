@@ -42,7 +42,7 @@ export default function TenantServicesPage() {
 
   return (
     <PageShell>
-      <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '80px' }}>
+      <main style={{ paddingTop: undefined, minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '80px' }}>
         {/* Header */}
         <div style={{ background: 'linear-gradient(180deg, var(--primary-50) 0%, #FFFFFF 100%)', padding: '48px 0', textAlign: 'center', borderBottom: '1px solid var(--border-light)' }}>
           <div className="container" style={{ maxWidth: '800px' }}>

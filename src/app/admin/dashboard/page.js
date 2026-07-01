@@ -71,7 +71,7 @@ export default function AdminDashboard() {
 
   return (
     <PageShell>
-      <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '60px' }}>
+      <main style={{ paddingTop: undefined, minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '60px' }}>
         {/* Header */}
         <div style={{ background: 'var(--gray-900)', color: 'white', padding: '28px 0' }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>

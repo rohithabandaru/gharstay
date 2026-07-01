@@ -18,7 +18,7 @@ export default function ContactPage() {
 
   return (
     <PageShell>
-      <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '80px' }}>
+      <main style={{ paddingTop: undefined, minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '80px' }}>
         <div style={{ background: 'white', borderBottom: '1px solid var(--border-light)', padding: '48px 0', textAlign: 'center' }}>
           <div className="container">
             <h1 style={{ fontSize: '2.25rem', fontWeight: '800', marginBottom: '8px' }}>Contact Our Support Team</h1>

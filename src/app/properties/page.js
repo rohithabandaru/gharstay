@@ -171,7 +171,7 @@ function PropertyListingContent() {
 
   return (
     <PageShell>
-      <main style={{ paddingTop: '80px', minHeight: '80vh', background: 'var(--bg-secondary)' }}>
+      <main style={{ paddingTop: undefined, minHeight: '80vh', background: 'var(--bg-secondary)' }}>
         {/* Header */}
         <div style={{ background: 'white', borderBottom: '1px solid var(--border-light)', padding: '32px 0' }}>
           <div className="container">

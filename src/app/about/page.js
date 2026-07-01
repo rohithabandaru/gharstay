@@ -4,7 +4,7 @@ import PageShell from '@/components/PageShell';
 export default function AboutPage() {
   return (
     <PageShell>
-      <main style={{ paddingTop: '80px', minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '80px' }}>
+      <main style={{ paddingTop: undefined, minHeight: '85vh', background: 'var(--bg-secondary)', paddingBottom: '80px' }}>
         {/* Hero Section */}
         <section style={{
           background: 'linear-gradient(180deg, var(--primary-50) 0%, #FFFFFF 100%)',
