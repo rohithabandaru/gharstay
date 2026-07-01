@@ -81,15 +81,7 @@ export default function Footer() {
             <FooterLink href="/contact">Contact Us</FooterLink>
           </div>
 
-          {/* Relocation Support */}
-          <div>
-            <h4 style={{ color: 'white', fontSize: '0.938rem', fontWeight: '700', marginBottom: '16px', fontFamily: 'var(--font-heading)' }}>Relocation Support</h4>
-            <FooterLink href="/tenant-services">Rental Agreements</FooterLink>
-            <FooterLink href="/tenant-services">Packers & Movers</FooterLink>
-            <FooterLink href="/tenant-services">Deep Room Cleaning</FooterLink>
-            <FooterLink href="/tenant-services">WiFi Setup</FooterLink>
-            <FooterLink href="/tenant/dashboard">My Bookings</FooterLink>
-          </div>
+
 
           {/* Popular Areas */}
           <div>

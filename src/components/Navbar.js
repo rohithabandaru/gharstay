@@ -71,7 +71,6 @@ export default function Navbar({ onAuthClick }) {
             <NavLink href="/">Home</NavLink>
             <NavLink href="/properties">Explore Stays</NavLink>
             <NavLink href="/tenant/dashboard">My Bookings</NavLink>
-            <NavLink href="/tenant-services">Relocation Support 🧳</NavLink>
             <NavLink href="/pricing">Pricing</NavLink>
             <NavLink href="/about">About</NavLink>
             <NavLink href="/contact">Contact</NavLink>
@@ -159,7 +158,6 @@ export default function Navbar({ onAuthClick }) {
         <MobileLink href="/" onClick={() => setMobileOpen(false)}>Home</MobileLink>
         <MobileLink href="/properties" onClick={() => setMobileOpen(false)}>Explore Stays</MobileLink>
         <MobileLink href="/tenant/dashboard" onClick={() => setMobileOpen(false)}>📱 My Bookings</MobileLink>
-        <MobileLink href="/tenant-services" onClick={() => setMobileOpen(false)}>🧳 Relocation Support</MobileLink>
         <MobileLink href="/pricing" onClick={() => setMobileOpen(false)}>Pricing</MobileLink>
         <MobileLink href="/about" onClick={() => setMobileOpen(false)}>About</MobileLink>
         <MobileLink href="/contact" onClick={() => setMobileOpen(false)}>Contact</MobileLink>

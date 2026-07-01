@@ -158,26 +158,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ===== STATS BAR ===== */}
-        <section style={{
-          padding: '40px 0',
-          borderBottom: '1px solid var(--border-light)',
-        }}>
-          <div className="container">
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-              gap: '32px',
-              textAlign: 'center',
-            }}>
-              <StatItem value="10,000+" label="Happy Tenants" emoji="😊" />
-              <StatItem value="3,000+" label="Stays Listed" emoji="🏠" />
-              <StatItem value="13" label="Areas in Bangalore" emoji="📍" />
-              <StatItem value="1,500+" label="Verified Properties" emoji="✅" />
-            </div>
-          </div>
-        </section>
-
         {/* ===== HOW IT WORKS ===== */}
         <section className="section">
           <div className="container">
@@ -371,86 +351,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ===== OWNER CTA ===== */}
-        <section style={{
-          padding: '80px 0',
-          background: 'linear-gradient(135deg, #312E81 0%, #4338CA 50%, #6366F1 100%)',
-          color: 'white',
-          position: 'relative',
-          overflow: 'hidden',
-        }}>
-          <div style={{
-            position: 'absolute',
-            top: '-50%',
-            right: '-10%',
-            width: '500px',
-            height: '500px',
-            borderRadius: '50%',
-            background: 'rgba(255,255,255,0.05)',
-          }} />
-          <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '48px',
-              alignItems: 'center',
-            }}>
-              <div>
-                <h2 style={{ fontSize: '2.25rem', fontWeight: '800', marginBottom: '16px', color: 'white' }}>
-                  Relocating to a New City?
-                </h2>
-                <p style={{ fontSize: '1.063rem', lineHeight: '1.7', opacity: 0.85, marginBottom: '32px' }}>
-                  Get end-to-end support for your move: from digital rental agreements and pre-inspected spaces to moving and cleaning assistance.
-                </p>
-                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                  <Link href="/tenant-services" className="btn" style={{
-                    background: 'white',
-                    color: 'var(--primary-700)',
-                    fontWeight: '700',
-                    padding: '14px 28px',
-                    textDecoration: 'none',
-                    borderRadius: 'var(--radius-md)',
-                  }}>
-                    Explore Relocation Support 🧳
-                  </Link>
-                  <Link href="/properties" className="btn" style={{
-                    background: 'rgba(255,255,255,0.15)',
-                    color: 'white',
-                    border: '1px solid rgba(255,255,255,0.3)',
-                    textDecoration: 'none',
-                    borderRadius: 'var(--radius-md)',
-                  }}>
-                    Browse Stays →
-                  </Link>
-                </div>
-              </div>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '16px',
-              }}>
-                {[
-                  { icon: '📜', title: 'Digital Lease', desc: '100% legal, e-signed contracts' },
-                  { icon: '🚚', title: 'Moving Help', desc: 'Safe and hassle-free packing' },
-                  { icon: '🧹', title: 'Deep Clean', desc: 'Sanitised rooms before move-in' },
-                  { icon: '📶', title: 'Pre-fitted WiFi', desc: 'High-speed internet ready to go' },
-                ].map((item, i) => (
-                  <div key={i} style={{
-                    background: 'rgba(255,255,255,0.1)',
-                    borderRadius: 'var(--radius-lg)',
-                    padding: '20px',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                  }}>
-                    <div style={{ fontSize: '1.75rem', marginBottom: '8px' }}>{item.icon}</div>
-                    <h4 style={{ fontSize: '0.938rem', fontWeight: '700', marginBottom: '4px', color: 'white' }}>{item.title}</h4>
-                    <p style={{ fontSize: '0.75rem', opacity: 0.7 }}>{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ===== TESTIMONIALS ===== */}
         <section className="section">
           <div className="container">
@@ -491,6 +391,26 @@ export default function HomePage() {
                   </p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== STATS BAR ===== */}
+        <section style={{
+          padding: '40px 0',
+          borderBottom: '1px solid var(--border-light)',
+        }}>
+          <div className="container">
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+              gap: '32px',
+              textAlign: 'center',
+            }}>
+              <StatItem value="10,000+" label="Happy Tenants" emoji="😊" />
+              <StatItem value="3,000+" label="Stays Listed" emoji="🏠" />
+              <StatItem value="13" label="Areas in Bangalore" emoji="📍" />
+              <StatItem value="1,500+" label="Verified Properties" emoji="✅" />
             </div>
           </div>
         </section>
