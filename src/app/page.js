@@ -41,7 +41,7 @@ export default function HomePage() {
 
           <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
             <div className="badge badge-primary" style={{ marginBottom: '16px', fontSize: '0.813rem', padding: '6px 16px' }}>
-              🏠 India's #1 Rental Property Platform
+              🏠 India's #1 Rental Property Platform - Updated
             </div>
             <h1 style={{
               fontSize: 'clamp(2rem, 5vw, 3.5rem)',
